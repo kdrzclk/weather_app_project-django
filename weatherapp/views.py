@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from decouple import config
 import requests
 from .models import City
@@ -39,11 +39,17 @@ def home(request):
         content = response.json()
         data = {
             'city': city,
-            'temp': content['main']['temp'],
+            'temp': round(content['main']['temp']),
             'icon': content['weather'][0]['icon'],
             'desc': content['weather'][0]['description']
         }
         city_data.append(data)
         pprint(city_data)
 
-    return render(request, 'whetherapp/home.html', {'city_data': city_data})
+    return render(request, 'weatherapp/home.html', {'city_data': city_data})
+
+def delete_city(request, id):
+    city = get_object_or_404(City, id=id)
+    city.delete()
+    messages.success(request, 'City deleted!')
+    return redirect('home')

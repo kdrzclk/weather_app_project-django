@@ -14,14 +14,13 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="{% static 'weatherapp/css/main.css' %}" />
 
     <title>Weather App</title>
   </head>
 
-  <body>
-    
-    <div style="margin-top: 100px; margin-bottom: 100px" class="container">
+  <body style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(62,76,179,1) 0%, rgba(0,212,255,1) 100%)">
+    <h1 style="text-align: center; color: white;" class="m-5">Weather App</h1>
+    <div class="container">
       {% if messages %} 
         {% for message in messages %} 
           {% if message.tags == "error" %}

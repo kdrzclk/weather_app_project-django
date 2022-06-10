@@ -1,0 +1,61 @@
+{% extends 'weatherapp/base.html' %} 
+
+{% load crispy_forms_tags %} 
+
+{% block content %}
+
+  <div>
+    <div class="container d-flex justify-content-center mb-5">
+      <form action="" method="get" class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            placeholder="Enter the city..."
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Add</button>
+      </form>
+    </div>
+
+    <div class="row mt-5">
+      {% for city in city_data %}
+      <div class="col-4 ">
+        <div
+        style="background-color: #070937;"
+          class="card shadow p-3 mb-5 rounded"
+          style="width: 18rem; height: 25rem"
+          
+        >
+          <img
+            src="http://openweathermap.org/img/wn/{{ city.icon }}.png"
+            alt="post_image"
+            class="card-img-top mx-auto"
+            width="150px"
+            
+            
+          />
+          <h5 class="card-title text-white mx-auto">{{ city.temp }} <span>&#8451;</span></h5>
+          <p style="font-size: 18px;" class="card-title text-white mx-auto"> {{city.desc}} </p>
+    
+          <div class="card-body mx-auto">
+           
+            <h5 class="card-title text-white mt-2">
+              {{city.city | upper}}
+            </h5> 
+          </div>
+          <div class="mx-auto">
+            <a style="text-decoration: none; color: white;" href="{% url 'delete' city.city.id %}">
+              <button class="btn btn-outline-danger m-3" type="submit">Delete</button>
+            </a>
+          </div>
+            
+          
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock content %}
